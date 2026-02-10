@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Valentine? 💕</title>
+    <title>💕 Be My Valentine 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,216 +13,419 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #ffecd2 100%);
+            font-family: 'Dancing Script', cursive;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #ffc3a0 100%);
             overflow: hidden;
             position: relative;
         }
 
-        /* Floating hearts animation */
-        .heart {
+        /* Animated hearts background with 73 */
+        .floating-heart {
             position: absolute;
-            font-size: 30px;
-            animation: float 6s infinite;
-            opacity: 0.6;
+            font-size: 60px;
+            opacity: 0.3;
+            color: #ff69b4;
+            animation: floatHeart 15s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
+        .heart-number {
+            position: absolute;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .floating-heart:nth-child(1) {
+            top: 10%;
+            left: 15%;
+            animation-delay: 0s;
+            animation-duration: 12s;
+        }
+
+        .floating-heart:nth-child(2) {
+            top: 70%;
+            left: 80%;
+            animation-delay: 2s;
+            animation-duration: 14s;
+        }
+
+        .floating-heart:nth-child(3) {
+            top: 30%;
+            left: 85%;
+            animation-delay: 4s;
+            animation-duration: 16s;
+        }
+
+        .floating-heart:nth-child(4) {
+            top: 60%;
+            left: 10%;
+            animation-delay: 1s;
+            animation-duration: 13s;
+        }
+
+        .floating-heart:nth-child(5) {
+            top: 85%;
+            left: 20%;
+            animation-delay: 3s;
+            animation-duration: 15s;
+        }
+
+        .floating-heart:nth-child(6) {
+            top: 15%;
+            left: 90%;
+            animation-delay: 5s;
+            animation-duration: 17s;
+        }
+
+        .floating-heart:nth-child(7) {
+            top: 45%;
+            left: 5%;
+            animation-delay: 6s;
+            animation-duration: 14s;
+        }
+
+        .floating-heart:nth-child(8) {
+            top: 25%;
+            left: 10%;
+            animation-delay: 2.5s;
+            animation-duration: 16s;
+        }
+
+        .floating-heart:nth-child(9) {
+            top: 80%;
+            left: 85%;
+            animation-delay: 4.5s;
+            animation-duration: 13s;
+        }
+
+        .floating-heart:nth-child(10) {
+            top: 50%;
+            left: 92%;
+            animation-delay: 1.5s;
+            animation-duration: 15s;
+        }
+
+        .floating-heart:nth-child(11) {
+            top: 35%;
+            left: 8%;
+            animation-delay: 3.5s;
+            animation-duration: 17s;
+        }
+
+        .floating-heart:nth-child(12) {
+            top: 90%;
+            left: 88%;
+            animation-delay: 5.5s;
+            animation-duration: 14s;
+        }
+
+        @keyframes floatHeart {
+            0%, 100% { 
+                transform: translateY(0px) translateX(0px) rotate(0deg);
             }
-            50% {
-                opacity: 0.6;
+            25% { 
+                transform: translateY(-30px) translateX(20px) rotate(5deg);
             }
-            100% {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
+            50% { 
+                transform: translateY(-50px) translateX(-10px) rotate(-5deg);
+            }
+            75% { 
+                transform: translateY(-30px) translateX(15px) rotate(3deg);
             }
         }
 
         .container {
             background: rgba(255, 255, 255, 0.95);
-            padding: 60px 80px;
+            padding: 60px 40px;
             border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.4);
             text-align: center;
-            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
             max-width: 600px;
+            width: 90%;
             position: relative;
             z-index: 10;
+            border: 3px solid rgba(255, 182, 193, 0.6);
+        }
+
+        .heart-icon {
+            font-size: 80px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.2); }
+            30% { transform: scale(1); }
         }
 
         h1 {
-            color: #ff1744;
-            font-size: 2.5em;
+            font-family: 'Pacifico', cursive;
+            color: #ff1493;
+            font-size: 48px;
             margin-bottom: 40px;
             text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
-            animation: pulse 2s infinite;
+            line-height: 1.3;
         }
 
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        .buttons-container {
+        .button-container {
             display: flex;
             gap: 30px;
             justify-content: center;
+            align-items: center;
             margin-top: 40px;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            position: relative;
+            min-height: 150px;
+            width: 100%;
         }
 
         button {
             padding: 20px 50px;
-            font-size: 1.3em;
+            font-size: 28px;
+            font-family: 'Dancing Script', cursive;
+            font-weight: 700;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            font-weight: bold;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            font-family: 'Georgia', serif;
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
+            position: relative;
         }
 
         #yesBtn {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
             color: white;
+            order: 2;
         }
 
         #yesBtn:hover {
             transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5);
+            box-shadow: 0 12px 30px rgba(255, 20, 147, 0.5);
         }
 
         #noBtn {
-            background: linear-gradient(135deg, #6c757d, #495057);
+            background: linear-gradient(135deg, #c0c0c0 0%, #909090 100%);
             color: white;
-            position: fixed;
-            transition: all 0.2s ease;
-            z-index: 1000;
+            order: 1;
+            transition: all 0.2s ease-out;
         }
 
-        .success-message {
+        /* Success page styles */
+        .success-container {
             display: none;
-            animation: fadeIn 1s ease;
+            text-align: center;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .success-message h2 {
-            color: #ff1744;
-            font-size: 2em;
+        .success-container h1 {
+            font-size: 42px;
+            color: #ff1493;
             margin-bottom: 30px;
         }
 
-        .success-message img {
-            max-width: 300px;
+        .success-container img {
+            max-width: 100%;
+            max-height: 400px;
+            height: auto;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
-            animation: bounceIn 1s ease;
+            margin-top: 20px;
+            border: 3px solid rgba(255, 182, 193, 0.6);
         }
 
-        @keyframes bounceIn {
-            0% {
-                transform: scale(0);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(1);
-            }
+        .ascii-heart {
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.2;
+            color: #ff1493;
+            text-align: center;
+            white-space: pre;
+            margin: 30px auto;
+            padding: 20px;
+            background: rgba(255, 182, 193, 0.1);
+            border-radius: 15px;
+            display: inline-block;
+            text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.3);
         }
 
-        .emoji {
-            font-size: 1.2em;
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            button {
+                padding: 15px 40px;
+                font-size: 24px;
+            }
+
+            .container {
+                padding: 40px 20px;
+            }
+
+            .success-container h1 {
+                font-size: 32px;
+            }
+
+            .floating-heart {
+                font-size: 40px;
+            }
+
+            .heart-number {
+                font-size: 14px;
+            }
+
+            .ascii-heart {
+                font-size: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Floating hearts background -->
-    <script>
-        for(let i = 0; i < 15; i++) {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + '%';
-            heart.style.animationDelay = Math.random() * 5 + 's';
-            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
-            document.body.appendChild(heart);
-        }
-    </script>
+    <!-- Floating hearts with 73 -->
+    <div class="floating-heart">💗<span class="heart-number">73</span></div>
+    <div class="floating-heart">💖<span class="heart-number">73</span></div>
+    <div class="floating-heart">💕<span class="heart-number">73</span></div>
+    <div class="floating-heart">💗<span class="heart-number">73</span></div>
+    <div class="floating-heart">💖<span class="heart-number">73</span></div>
+    <div class="floating-heart">💕<span class="heart-number">73</span></div>
+    <div class="floating-heart">💗<span class="heart-number">73</span></div>
+    <div class="floating-heart">💖<span class="heart-number">73</span></div>
+    <div class="floating-heart">💕<span class="heart-number">73</span></div>
+    <div class="floating-heart">💗<span class="heart-number">73</span></div>
+    <div class="floating-heart">💖<span class="heart-number">73</span></div>
+    <div class="floating-heart">💕<span class="heart-number">73</span></div>
 
     <div class="container">
-        <div id="question">
-            <h1>Will you be my valentine Srija? 💖</h1>
-            <div class="buttons-container" id="buttonsContainer">
-                <button id="yesBtn">Yes 💕</button>
-                <button id="noBtn">No</button>
+        <div id="questionPage">
+            <div class="heart-icon">💝</div>
+            <h1>Will you be my Valentine, Srija? 💕</h1>
+            <div class="button-container" id="buttonContainer">
+                <button id="yesBtn">YES 😍</button>
+                <button id="noBtn">NO 🥺</button>
             </div>
         </div>
 
-        <div class="success-message" id="successMessage">
-            <h2>I know you won't reject me <span class="emoji">😁😘💕</span></h2>
-            <img src="data:image/png;base64,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" alt="Cute celebration" id="celebrationImg">
+        <div class="success-container" id="successPage">
+            <div class="heart-icon">💖</div>
+            <h1>I know you won't reject me 😁😘💕</h1>
+            <div class="ascii-heart">
+       ♥♥♥♥♥       ♥♥♥♥♥
+     ♥♥♥♥♥♥♥   ♥♥♥♥♥♥♥
+   ♥♥♥♥♥♥♥♥♥ ♥♥♥♥♥♥♥♥♥
+  ♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥
+  ♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥
+  ♥♥♥  Saikat loves  ♥♥♥
+   ♥♥♥♥    Srija    ♥♥♥♥
+    ♥♥♥♥♥  💕💕💕  ♥♥♥♥♥
+      ♥♥♥♥♥♥♥♥♥♥♥♥♥♥
+        ♥♥♥♥♥♥♥♥♥♥♥
+          ♥♥♥♥♥♥♥♥
+            ♥♥♥♥♥
+              ♥♥
+               ♥
+            </div>
         </div>
     </div>
 
     <script>
         const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
-        const question = document.getElementById('question');
-        const successMessage = document.getElementById('successMessage');
-        const buttonsContainer = document.getElementById('buttonsContainer');
+        const buttonContainer = document.getElementById('buttonContainer');
+        const questionPage = document.getElementById('questionPage');
+        const successPage = document.getElementById('successPage');
 
-        // Function to move No button to random position
-        function moveNoButton() {
-            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
-            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+        // Check if device is mobile
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        let noBtnMoved = false; // Track if NO button has been moved from initial position
+
+        // Function to get random position anywhere in the viewport (not just container)
+        function getRandomPosition() {
+            const padding = 20; // Padding from edges
+            const btnWidth = noBtn.offsetWidth;
+            const btnHeight = noBtn.offsetHeight;
             
-            const randomX = Math.random() * maxX;
-            const randomY = Math.random() * maxY;
+            const maxX = window.innerWidth - btnWidth - padding;
+            const maxY = window.innerHeight - btnHeight - padding;
             
-            noBtn.style.left = randomX + 'px';
-            noBtn.style.top = randomY + 'px';
+            const randomX = Math.random() * (maxX - padding) + padding;
+            const randomY = Math.random() * (maxY - padding) + padding;
+            
+            return { x: randomX, y: randomY };
         }
 
-        // Set initial position for No button
-        moveNoButton();
+        // Function to move NO button to random position
+        function moveNoButton() {
+            if (!noBtnMoved) {
+                // First move: change to absolute positioning
+                noBtn.style.position = 'fixed';
+                noBtnMoved = true;
+            }
+            
+            const pos = getRandomPosition();
+            noBtn.style.left = pos.x + 'px';
+            noBtn.style.top = pos.y + 'px';
+            noBtn.style.transform = 'none';
+        }
 
-        // Make "No" button move on click (for mobile)
-        noBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            moveNoButton();
-        });
+        // Function to check if cursor is near NO button
+        function isCursorNear(mouseX, mouseY) {
+            const rect = noBtn.getBoundingClientRect();
+            const threshold = 100; // Distance in pixels to trigger movement
+            
+            const closestX = Math.max(rect.left, Math.min(mouseX, rect.right));
+            const closestY = Math.max(rect.top, Math.min(mouseY, rect.bottom));
+            
+            const distanceX = mouseX - closestX;
+            const distanceY = mouseY - closestY;
+            const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+            
+            return distance < threshold;
+        }
 
-        // Also keep mouseover for desktop users
-        noBtn.addEventListener('mouseover', () => {
-            moveNoButton();
-        });
+        // Desktop: Track mouse movement and move NO button when cursor gets close
+        if (!isMobile) {
+            document.addEventListener('mousemove', function(e) {
+                if (noBtnMoved || questionPage.style.display === 'none') return;
+                
+                if (isCursorNear(e.clientX, e.clientY)) {
+                    moveNoButton();
+                }
+            });
 
-        // Yes button click handler
-        yesBtn.addEventListener('click', () => {
-            question.style.display = 'none';
-            successMessage.style.display = 'block';
+            // Also trigger on direct hover
+            noBtn.addEventListener('mouseenter', function(e) {
+                moveNoButton();
+            });
+        }
+
+        // Mobile: Move NO button on touch/click attempt
+        if (isMobile) {
+            noBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                moveNoButton();
+            });
+
+            noBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                moveNoButton();
+            });
+        }
+
+        // YES button click - show success page
+        yesBtn.addEventListener('click', function() {
+            // Show success page
+            questionPage.style.display = 'none';
+            successPage.style.display = 'block';
         });
     </script>
 </body>
