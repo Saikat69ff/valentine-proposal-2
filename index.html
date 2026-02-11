@@ -12,27 +12,93 @@
             box-sizing: border-box;
         }
 
+        :root {
+            /* Dark theme colors (default) */
+            --bg-gradient-1: #1a1a2e;
+            --bg-gradient-2: #16213e;
+            --bg-gradient-3: #0f3460;
+            --container-bg: rgba(30, 30, 50, 0.95);
+            --container-border: rgba(255, 105, 180, 0.3);
+            --container-shadow-1: rgba(255, 105, 180, 0.3);
+            --container-shadow-2: rgba(138, 43, 226, 0.2);
+            --text-color: #ff69b4;
+            --text-shadow: 0 0 20px rgba(255, 105, 180, 0.6), 0 0 40px rgba(255, 105, 180, 0.3);
+            --heart-glow: drop-shadow(0 0 20px rgba(255, 105, 180, 0.8));
+            --floating-heart-opacity: 0.4;
+            --ascii-bg: rgba(255, 105, 180, 0.05);
+            --ascii-border: rgba(255, 105, 180, 0.2);
+        }
+
+        body.light-mode {
+            /* Light theme colors */
+            --bg-gradient-1: #ff9a9e;
+            --bg-gradient-2: #fecfef;
+            --bg-gradient-3: #ffc3a0;
+            --container-bg: rgba(255, 255, 255, 0.95);
+            --container-border: rgba(255, 105, 180, 0.4);
+            --container-shadow-1: rgba(255, 105, 180, 0.4);
+            --container-shadow-2: rgba(255, 182, 193, 0.3);
+            --text-color: #ff1493;
+            --text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+            --heart-glow: drop-shadow(2px 2px 4px rgba(255, 105, 180, 0.3));
+            --floating-heart-opacity: 0.3;
+            --ascii-bg: rgba(255, 182, 193, 0.1);
+            --ascii-border: rgba(255, 182, 193, 0.3);
+        }
+
         body {
             font-family: 'Dancing Script', cursive;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #ffc3a0 100%);
+            background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 50%, var(--bg-gradient-3) 100%);
             overflow: hidden;
             position: relative;
+            transition: background 0.5s ease;
+        }
+
+        /* Theme toggle button */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            z-index: 10000;
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(180deg);
+            box-shadow: 0 12px 30px rgba(255, 105, 180, 0.6);
+        }
+
+        .theme-toggle:active {
+            transform: scale(0.95) rotate(180deg);
         }
 
         /* Animated hearts background with 73 */
         .floating-heart {
             position: absolute;
             font-size: 60px;
-            opacity: 0.3;
+            opacity: var(--floating-heart-opacity);
             color: #ff69b4;
             animation: floatHeart 15s ease-in-out infinite;
             display: flex;
             align-items: center;
             justify-content: center;
+            filter: var(--heart-glow);
+            transition: opacity 0.5s ease, filter 0.5s ease;
         }
 
         .heart-number {
@@ -40,7 +106,7 @@
             font-size: 18px;
             font-weight: bold;
             color: #fff;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 0 5px rgba(255, 105, 180, 0.8), 0 0 10px rgba(255, 105, 180, 0.5);
         }
 
         .floating-heart:nth-child(1) {
@@ -143,16 +209,17 @@
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--container-bg);
             padding: 60px 40px;
             border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.4);
+            box-shadow: 0 20px 60px var(--container-shadow-1), 0 0 40px var(--container-shadow-2);
             text-align: center;
             max-width: 600px;
             width: 90%;
             position: relative;
             z-index: 10;
-            border: 3px solid rgba(255, 182, 193, 0.6);
+            border: 2px solid var(--container-border);
+            transition: all 0.5s ease;
         }
 
         .heart-icon {
@@ -160,6 +227,8 @@
             animation: heartbeat 1.5s ease-in-out infinite;
             display: inline-block;
             margin-bottom: 20px;
+            filter: var(--heart-glow);
+            transition: filter 0.5s ease;
         }
 
         @keyframes heartbeat {
@@ -170,11 +239,12 @@
 
         h1 {
             font-family: 'Pacifico', cursive;
-            color: #ff1493;
+            color: var(--text-color);
             font-size: 48px;
             margin-bottom: 40px;
-            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+            text-shadow: var(--text-shadow);
             line-height: 1.3;
+            transition: color 0.5s ease, text-shadow 0.5s ease;
         }
 
         .button-container {
@@ -220,6 +290,87 @@
             transition: all 0.2s ease-out;
         }
 
+        /* Heart particle animation for YES button */
+        .heart-particle {
+            position: fixed;
+            font-size: 20px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: explodeHeart 2s ease-out forwards;
+        }
+
+        @keyframes explodeHeart {
+            0% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Smoke trail animation for NO button */
+        .smoke-particle {
+            position: fixed;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: smokeTrail 3s ease-out forwards;
+        }
+
+        @keyframes smokeTrail {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(0, 30px) scale(0.3);
+                opacity: 0;
+            }
+        }
+
+        /* Floating watermark */
+        .watermark {
+            position: fixed;
+            font-family: 'Pacifico', cursive;
+            font-size: 24px;
+            color: rgba(255, 105, 180, 0.15);
+            pointer-events: none;
+            z-index: 1;
+            animation: floatWatermark 20s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.1);
+            font-weight: bold;
+        }
+
+        body.light-mode .watermark {
+            color: rgba(255, 105, 180, 0.12);
+        }
+
+        @keyframes floatWatermark {
+            0%, 100% { 
+                transform: translate(0, 0) rotate(-15deg);
+            }
+            25% { 
+                transform: translate(30px, -40px) rotate(-10deg);
+            }
+            50% { 
+                transform: translate(-20px, -60px) rotate(-20deg);
+            }
+            75% { 
+                transform: translate(40px, -30px) rotate(-5deg);
+            }
+        }
+
+        .watermark:nth-child(1) { animation-delay: 0s; animation-duration: 18s; top: 15%; left: 10%; }
+        .watermark:nth-child(2) { animation-delay: 2s; animation-duration: 22s; top: 25%; left: 75%; }
+        .watermark:nth-child(3) { animation-delay: 4s; animation-duration: 20s; top: 60%; left: 15%; }
+        .watermark:nth-child(4) { animation-delay: 6s; animation-duration: 19s; top: 70%; left: 80%; }
+        .watermark:nth-child(5) { animation-delay: 8s; animation-duration: 21s; top: 40%; left: 5%; }
+        .watermark:nth-child(6) { animation-delay: 10s; animation-duration: 23s; top: 50%; left: 85%; }
+        .watermark:nth-child(7) { animation-delay: 12s; animation-duration: 17s; top: 85%; left: 20%; }
+        .watermark:nth-child(8) { animation-delay: 14s; animation-duration: 24s; top: 10%; left: 90%; }
+
         /* Success page styles */
         .success-container {
             display: none;
@@ -228,8 +379,10 @@
 
         .success-container h1 {
             font-size: 42px;
-            color: #ff1493;
+            color: var(--text-color);
             margin-bottom: 30px;
+            text-shadow: var(--text-shadow);
+            transition: color 0.5s ease, text-shadow 0.5s ease;
         }
 
         .success-container img {
@@ -243,18 +396,20 @@
         }
 
         .ascii-heart {
-            font-family: monospace;
-            font-size: 14px;
-            line-height: 1.2;
-            color: #ff1493;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            line-height: 1.1;
+            color: var(--text-color);
             text-align: center;
             white-space: pre;
             margin: 30px auto;
-            padding: 20px;
-            background: rgba(255, 182, 193, 0.1);
+            padding: 30px;
+            background: var(--ascii-bg);
             border-radius: 15px;
             display: inline-block;
-            text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.3);
+            text-shadow: var(--text-shadow);
+            border: 1px solid var(--ascii-border);
+            transition: all 0.5s ease;
         }
 
         @media (max-width: 600px) {
@@ -284,12 +439,26 @@
             }
 
             .ascii-heart {
-                font-size: 10px;
+                font-size: 11px;
+                padding: 20px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌓</button>
+    
+    <!-- Floating watermarks -->
+    <div class="watermark">SAIKAT</div>
+    <div class="watermark">SAIKAT</div>
+    <div class="watermark">SAIKAT</div>
+    <div class="watermark">SAIKAT</div>
+    <div class="watermark">SAIKAT</div>
+    <div class="watermark">SAIKAT</div>
+    <div class="watermark">SAIKAT</div>
+    <div class="watermark">SAIKAT</div>
+    
     <!-- Floating hearts with 73 -->
     <div class="floating-heart">💗<span class="heart-number">73</span></div>
     <div class="floating-heart">💖<span class="heart-number">73</span></div>
@@ -317,22 +486,20 @@
         <div class="success-container" id="successPage">
             <div class="heart-icon">💖</div>
             <h1>I know you won't reject me 😁😘💕</h1>
-            <div class="ascii-heart">
-       ♥♥♥♥♥       ♥♥♥♥♥
-     ♥♥♥♥♥♥♥   ♥♥♥♥♥♥♥
-   ♥♥♥♥♥♥♥♥♥ ♥♥♥♥♥♥♥♥♥
-  ♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥
-  ♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥♥
-  ♥♥♥  Saikat loves  ♥♥♥
-   ♥♥♥♥    Srija    ♥♥♥♥
-    ♥♥♥♥♥  💕💕💕  ♥♥♥♥♥
-      ♥♥♥♥♥♥♥♥♥♥♥♥♥♥
-        ♥♥♥♥♥♥♥♥♥♥♥
-          ♥♥♥♥♥♥♥♥
-            ♥♥♥♥♥
-              ♥♥
-               ♥
-            </div>
+            <div class="ascii-heart">    ❤❤❤❤       ❤❤❤❤
+  ❤❤❤❤❤❤   ❤❤❤❤❤❤
+ ❤❤❤❤❤❤❤❤ ❤❤❤❤❤❤❤❤
+❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤
+❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤
+❤❤❤  Saikat Loves  ❤❤❤
+ ❤❤❤❤    Srija    ❤❤❤❤
+  ❤❤❤❤❤  💕💕💕  ❤❤❤❤❤
+   ❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤
+     ❤❤❤❤❤❤❤❤❤❤❤❤
+       ❤❤❤❤❤❤❤❤❤
+         ❤❤❤❤❤❤
+           ❤❤❤
+            ❤</div>
         </div>
     </div>
 
@@ -342,11 +509,109 @@
         const buttonContainer = document.getElementById('buttonContainer');
         const questionPage = document.getElementById('questionPage');
         const successPage = document.getElementById('successPage');
+        const themeToggle = document.getElementById('themeToggle');
+
+        // Theme toggle functionality
+        let isLightMode = false;
+        
+        themeToggle.addEventListener('click', function() {
+            isLightMode = !isLightMode;
+            document.body.classList.toggle('light-mode');
+            
+            // Update button icon
+            themeToggle.textContent = isLightMode ? '🌙' : '🌓';
+            
+            // Save preference to localStorage
+            localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
+        });
+
+        // Load saved theme preference
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                isLightMode = true;
+                document.body.classList.add('light-mode');
+                themeToggle.textContent = '🌙';
+            }
+        });
 
         // Check if device is mobile
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
         let noBtnMoved = false; // Track if NO button has been moved from initial position
+        let smokeInterval = null; // Track smoke generation interval
+
+        // Heart colors for explosion
+        const heartColors = ['❤️', '💖', '💗', '💓', '💕', '💝', '💘', '💞'];
+
+        // Function to create heart explosion from YES button (Big Bang style)
+        function createHeartExplosion() {
+            const rect = yesBtn.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            // Create 50 hearts for a bigger explosion
+            for (let i = 0; i < 50; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-particle';
+                heart.textContent = heartColors[Math.floor(Math.random() * heartColors.length)];
+                heart.style.left = centerX + 'px';
+                heart.style.top = centerY + 'px';
+                
+                // Random direction for big bang explosion
+                const angle = Math.random() * Math.PI * 2; // Completely random angles
+                const velocity = 150 + Math.random() * 400; // More varied velocities
+                const tx = Math.cos(angle) * velocity;
+                const ty = Math.sin(angle) * velocity;
+                
+                heart.style.setProperty('--tx', tx + 'px');
+                heart.style.setProperty('--ty', ty + 'px');
+                
+                document.body.appendChild(heart);
+                
+                // Remove after animation
+                setTimeout(() => {
+                    heart.remove();
+                }, 2000);
+            }
+        }
+
+        // Function to create smoke trail from NO button (3x more particles)
+        function createSmokeParticle() {
+            const rect = noBtn.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            // Create 3 broken hearts at once
+            for (let i = 0; i < 3; i++) {
+                const smoke = document.createElement('div');
+                smoke.className = 'smoke-particle';
+                smoke.textContent = '💔';
+                smoke.style.left = (centerX - 20 + Math.random() * 40) + 'px';
+                smoke.style.top = (centerY - 20 + Math.random() * 40) + 'px';
+                
+                document.body.appendChild(smoke);
+                
+                // Remove after animation
+                setTimeout(() => {
+                    smoke.remove();
+                }, 3000);
+            }
+        }
+
+        // Function to start smoke trail
+        function startSmokeTrail() {
+            if (smokeInterval) return; // Already running
+            smokeInterval = setInterval(createSmokeParticle, 100);
+        }
+
+        // Function to stop smoke trail
+        function stopSmokeTrail() {
+            if (smokeInterval) {
+                clearInterval(smokeInterval);
+                smokeInterval = null;
+            }
+        }
 
         // Function to get random position anywhere in the viewport (not just container)
         function getRandomPosition() {
@@ -371,10 +636,16 @@
                 noBtnMoved = true;
             }
             
+            // Start smoke trail when moving
+            startSmokeTrail();
+            
             const pos = getRandomPosition();
             noBtn.style.left = pos.x + 'px';
             noBtn.style.top = pos.y + 'px';
             noBtn.style.transform = 'none';
+            
+            // Stop smoke after button settles (200ms)
+            setTimeout(stopSmokeTrail, 200);
         }
 
         // Function to check if cursor is near NO button
@@ -421,11 +692,16 @@
             });
         }
 
-        // YES button click - show success page
+        // YES button click - create explosion and show success page
         yesBtn.addEventListener('click', function() {
-            // Show success page
-            questionPage.style.display = 'none';
-            successPage.style.display = 'block';
+            // Create heart explosion immediately
+            createHeartExplosion();
+            
+            // Wait 1.3 seconds (reduced from 2.0 by 0.70 sec) before showing success page
+            setTimeout(() => {
+                questionPage.style.display = 'none';
+                successPage.style.display = 'block';
+            }, 1300);
         });
     </script>
 </body>
